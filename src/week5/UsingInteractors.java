@@ -20,6 +20,9 @@ public class UsingInteractors extends GraphicsProgram{
 	private JButton clear;
 	private Map<String, GObject> obj;
 	private GObject objSelected;
+	private double pX;
+	private double pY;
+	private double[] current;
 
 	
 	
@@ -63,6 +66,10 @@ public class UsingInteractors extends GraphicsProgram{
 	}
 	
 	private void clearObj() {
+		Iterator<String> it = obj.keySet().iterator();
+		while(obj.isEmpty() != true) {
+			removeObj(it.next());
+		}
 		obj.clear();
 	}
 	
@@ -78,17 +85,29 @@ public class UsingInteractors extends GraphicsProgram{
 		}
 	}
 	
+	
+	public void mousePressed(MouseEvent e) {
+		
+		pX = e.getX();
+		pY = e.getY();
+		
+		objSelected = getElementAt(pX, pY);
+		
+		
+	}
+	
 	public void mouseDragged(MouseEvent e) {
 		
 		if (objSelected != null) {
-			objSelected.move(e.getX(), e.getY());
+			objSelected.move(e.getX() - objSelected.getX(), 
+								e.getY()-objSelected.getY());
+			
 		}
 	}
 	
-	
-	//public void mouseClickedEvent(MouseEvent e) {
+	public void mouseClickedEvent(MouseEvent e) {
 		
-	//}
+	}
 	
 	
 	
